@@ -138,7 +138,7 @@ include_directories(${LIBRDKAFKA_INCLUDE_DIR} ${LIBYAML_CPP_INCLUDE_DIR} ${LIBPA
 # Set the libs to link
 set(LIBS ${LIBYAML_CPP_LIBRARY} ${LIBRDKAFKA_CPP_LIBRARY} ${LIBRDKAFKA_LIBRARY} ${LIBPARSEBGP_LIBRARY} z ${SSL_LIBS} dl pthread)
 
-add_executable(obmpv2_translator src/Main.cpp src/CLI.h src/Config.cpp src/Config.h src/Logger.cpp src/Logger.h src/Consumer.cpp src/Consumer.h src/Translator.cpp src/Translator.h src/Producer.cpp src/Producer.h)
+add_executable(obmpv2_translator src/Main.cpp src/CLI.h src/Config.cpp src/Config.h src/Logger.cpp src/Logger.h src/Consumer.cpp src/Consumer.h src/Translator.cpp src/Translator.h src/Producer.cpp src/Producer.h src/Converter/ConverterInterface.h)
 
 # Link the binary
 target_link_libraries(obmpv2_translator ${LIBS})

@@ -20,9 +20,10 @@ private:
 
     bool running = false;
     Consumer consumer = Consumer();
-    Producer producer = Producer();
+//    Producer producer = Producer();
 
     // TODO: v2-to-v1 translation functions
+
 
 };
 

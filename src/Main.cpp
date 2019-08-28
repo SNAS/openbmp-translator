@@ -14,6 +14,7 @@ using namespace std;
 static Logger *logger;
 static Translator *translator;
 
+// termination signal handling
 static void sigterm (int sig) {
     LOG_INFO("Termination signal received %d", sig);
     translator->stop();
