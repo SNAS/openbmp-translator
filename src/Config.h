@@ -19,6 +19,9 @@ public:
     Config(Config const&) = delete;
     void operator=(Config const&)  = delete;
 
+    // deconstructor
+    ~Config() {delete singleton_instance;};
+
     /* Method to load variables from a config file */
     void load_config_file();
 
@@ -34,8 +37,9 @@ public:
     string obmpv2_brokers;
     string group_id = "caida";
 
-    // deconstructor
-    ~Config() {delete singleton_instance;};
+    // openbmp v1 parsed topic to topic template mapping
+    // e.g., "router" : "{{router_group}}.router"
+    map<string, string> openbmp_v1_topic_template;
 
 private:
     /* private constructor */
