@@ -16,17 +16,17 @@ Consumer::Consumer() {
     }
 
     /*
-     * Create consumer using accumulated global configuration.
+     * Create obmp_v2_consumer using accumulated global configuration.
      */
     consumer = RdKafka::KafkaConsumer::create(kafka_conf, errstr);
     if (!consumer) {
-        std::cerr << "Failed to create consumer: " << errstr << std::endl;
+        std::cerr << "Failed to create obmp_v2_consumer: " << errstr << std::endl;
         exit(1);
     }
 
     delete kafka_conf;
 
-    std::cout << "% Created consumer " << consumer->name() << std::endl;
+    std::cout << "% Created obmp_v2_consumer " << consumer->name() << std::endl;
 
     /*
      * Subscribe to topics
@@ -39,7 +39,7 @@ Consumer::Consumer() {
         exit(1);
     }
 
-    std::cout << "% consumer initialized. " << consumer->name() << std::endl;
+    std::cout << "% obmp_v2_consumer initialized. " << consumer->name() << std::endl;
 
 }
 
