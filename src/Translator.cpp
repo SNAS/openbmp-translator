@@ -1,6 +1,7 @@
 #include "Translator.h"
 #include <unistd.h>
 #include <thread>
+
 extern "C" {
 #include "parsebgp.h"
 }
@@ -26,12 +27,16 @@ void Translator::start() {
     parsebgp_msg_t *parsed_msg;
     parsed_msg = parsebgp_create_msg();
 
+    // initialize converter buf
+    uint8_t converted_buf[10000];
+    size_t converted_len = 0;
+
     // use fp to dump openbmp msgs from kafka.
     // FILE *fp = fopen("/tmp/openbmp_raw_dump/openbmp_dump_0.txt", "w");
 
     while (running) {
         // retrieve obmp v2 (kafka) kafka_msg
-        RdKafka::Message* kafka_msg = consumer.get_message();
+        RdKafka::Message* kafka_msg = obmp_v2_consumer.get_message();
 
         // parse the kafka_msg if no kafka error
         if (kafka_msg->err() == RdKafka::ERR_NO_ERROR) {
@@ -46,10 +51,15 @@ void Translator::start() {
             assert(read_len == kafka_msg->len());
 
             // fwrite(obmpv2_msg, 1, kafka_msg->len(), fp);
+        } else {
+            sleep(1);
+            continue;
         }
 
         // TODO: translate the kafka_msg if libparsebgp parsed the kafka payload correctly
+        // note that parse_err has to be PARSEBGP_OK as we always pass the full openbmp msg to libparsebgp
         if (parse_err == PARSEBGP_OK) {
+            obmp_v1_converter.convert(parsed_msg->types.openbmp, converted_buf, &converted_len);
             LOG_INFO("libparsebgp parsed a kafka_msg.");
         } else {
             LOG_INFO("stopping the translator, something serious happened -- %d", parse_err);
