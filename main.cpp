@@ -91,12 +91,17 @@ int main(int argc, char **argv) {
 
     // init logger
     logger = Logger::init(nullptr, nullptr);
+    // init message bus
+    MessageBus::init();
 
     signal(SIGINT, sigterm);
     signal(SIGTERM, sigterm);
 
     translator = new Translator();
     translator->start();
+
+    // termination signal received, now we clean up.
+    delete translator;
 
     return 0;
 }

@@ -1,2 +1,2 @@
 # openbmp-translator
-OpenBMP consumer to parse and translate raw BMP messages into other formats
+OpenBMP obmp_v2_consumer to parse and translate raw BMP messages into other formats
