@@ -7,6 +7,8 @@ extern "C" {
 #include "parsebgp.h"
 }
 
+#define OUTPUT_BUF_LEN 10000
+
 class ConverterInterface {
 public:
     // all converters must implement the convert()

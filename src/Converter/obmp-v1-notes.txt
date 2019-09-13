@@ -1,0 +1,11 @@
+1. parseUpdateMsg() parses everything in a bgp update msg.
+    - treat this function as libparsebgp.
+
+2. take parsed data and feed it to different msg type handlers.
+
+3. each handler continues to convert data in the parsed structure.
+
+4. each handler calls a corresponding msg bus producer function to produce a kafka msg.
+    - each producer function still needs to modify the data...
+
+5. too many variables need to be modified from the result produced by libparsebgp.

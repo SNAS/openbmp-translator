@@ -28,7 +28,7 @@ void Translator::start() {
     parsed_msg = parsebgp_create_msg();
 
     // initialize converter buf
-    uint8_t converted_buf[10000];
+    uint8_t converted_buf[OUTPUT_BUF_LEN];
     size_t converted_len = 0;
 
     // use fp to dump openbmp msgs from kafka.

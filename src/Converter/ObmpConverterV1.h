@@ -4,6 +4,7 @@
 #include "ConverterInterface.h"
 #include "Logger.h"
 
+
 class ObmpConverterV1 : ConverterInterface {
 public:
     // constructor
@@ -59,11 +60,8 @@ private:
     // bgp-related msgs //
     //////////////////////
 
-    // handles advertised prefixes
-    void bgp_ad_prefix_msg();
-
-    // handles withdraw msgs.
-    void bgp_withdraw_prefix_msg();
+    // handles advertised and withdrawn prefixes
+    void bgp_prefix_msg();
 
     // handles path attributes
     void bgp_path_attr_msg();
